@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrendGear - Dashboard de Monitoreo de Transacciones</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <!-- Lucide Icons para un diseño premium -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header & Navegación -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo">
+                <i data-lucide="trending-up" class="logo-icon"></i>
+                <span class="logo-text">Trend<span class="accent-text">Gear</span></span>
+            </div>
+            
+            <button class="hamburger-btn" aria-label="Menu" id="hamburgerBtn">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <nav class="nav-menu" id="navMenu">
+                <ul>
+                    <li><a href="#" id="btnResumen" class="nav-link active"><i data-lucide="layout-dashboard"></i> Resumen</a></li>
+                    <li><a href="#" id="btnAnalitica" class="nav-link"><i data-lucide="pie-chart"></i> Analítica</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-content">
+        <!-- Tarjetas KPI -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon-wrapper sales">
+                    <i data-lucide="dollar-sign"></i>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Ventas Totales</span>
+                    <h3 class="kpi-value" id="kpiVentas">$0.00</h3>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon-wrapper clients">
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Clientes Totales</span>
+                    <div class="kpi-value-container">
+                        <h3 class="kpi-value" id="kpiClientes">0</h3>
+                        <div class="status-indicator" title="Cliente Activo">
+                            <span class="pulse-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-icon-wrapper ticket">
+                    <i data-lucide="shopping-bag"></i>
+                </div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Ticket Promedio</span>
+                    <h3 class="kpi-value" id="kpiTicket">$0.00</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabla de Transacciones -->
+        <section class="table-section">
+            <div class="table-header-wrapper">
+                <h2 class="table-title">Live Transactions</h2>
+                <div class="search-box-wrapper">
+                    <i data-lucide="search" class="search-icon"></i>
+                    <input type="text" id="tableSearch" placeholder="Buscar transacción..." class="search-input">
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="transactions-table" id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th>ID Cliente</th>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Producto</th>
+                            <th>Fecha</th>
+                            <th>Monto</th>
+                            <th>Ciudad</th>
+                            <th>Pago</th>
+                            <th>Membresía</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsBody">
+                        <tr>
+                            <td colspan="9" class="table-loading">Cargando datos en tiempo real...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Analítica de Edades -->
+        <section id="analyticsSection" class="analytics-section">
+            <h2 class="section-title"><i data-lucide="bar-chart-3"></i> Analítica de Edades</h2>
+            <div class="analytics-grid">
+                <div class="age-card young">
+                    <div class="age-card-header">
+                        <h4>Jóvenes</h4>
+                        <span class="age-bracket">&lt; 30 años</span>
+                    </div>
+                    <div class="age-card-body">
+                        <div class="age-metric">
+                            <span class="age-count" id="countYoung">0</span> Clientes
+                        </div>
+                        <div class="percentage-label" id="percentYoung">0%</div>
+                    </div>
+                </div>
+
+                <div class="age-card adult">
+                    <div class="age-card-header">
+                        <h4>Adultos</h4>
+                        <span class="age-bracket">30 - 50 años</span>
+                    </div>
+                    <div class="age-card-body">
+                        <div class="age-metric">
+                            <span class="age-count" id="countAdult">0</span> Clientes
+                        </div>
+                        <div class="percentage-label" id="percentAdult">0%</div>
+                    </div>
+                </div>
+
+                <div class="age-card senior">
+                    <div class="age-card-header">
+                        <h4>Mayores</h4>
+                        <span class="age-bracket">&gt; 50 años</span>
+                    </div>
+                    <div class="age-card-body">
+                        <div class="age-metric">
+                            <span class="age-count" id="countSenior">0</span> Clientes
+                        </div>
+                        <div class="percentage-label" id="percentSenior">0%</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2026 TrendGear Enterprise. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Firebase SDK (Compat v9 para un uso directo y rápido en Vanilla JS) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    
+    <!-- Script Principal -->
+    <script src="app.js"></script>
+</body>
+</html>

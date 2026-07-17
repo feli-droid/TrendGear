@@ -1,0 +1,654 @@
+/* ==========================================================================
+   VARIABLES GLOBALES & RESET
+   ========================================================================== */
+   :root {
+    --bg-main: #1E1E1E;
+    --bg-card: #2A2A2A;
+    --border-color: #3D3D3D;
+    --accent-blue: #007BFF;
+    --accent-red: #FF3B30;
+    --neon-blue: #00D2FF;
+    --neon-green: #39FF14;
+    --text-pure: #FFFFFF;
+    --text-muted: #A0A0A0;
+    --font-main: 'Outfit', sans-serif;
+    --font-title: 'Permanent Marker', cursive;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-pure);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   HEADER & NAVEGACIÓN
+   ========================================================================== */
+.main-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    color: var(--accent-blue);
+    width: 28px;
+    height: 28px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.logo-text .accent-text {
+    color: var(--accent-blue);
+}
+
+/* Menú de Navegación */
+.nav-menu ul {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-link i {
+    width: 18px;
+    height: 18px;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-pure);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-link.active {
+    border-bottom: 2px solid var(--accent-blue);
+    border-radius: 6px 6px 0 0;
+}
+
+/* Botón Hamburguesa */
+.hamburger-btn {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 24px;
+    height: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+.hamburger-btn .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-pure);
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   ESTRUCTURA CONTENEDORA
+   ========================================================================== */
+.dashboard-content {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* ==========================================================================
+   TARJETAS KPI
+   ========================================================================== */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.kpi-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.kpi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.kpi-icon-wrapper {
+    width: 54px;
+    height: 54px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kpi-icon-wrapper i {
+    width: 26px;
+    height: 26px;
+}
+
+.kpi-icon-wrapper.sales {
+    background-color: rgba(0, 123, 255, 0.15);
+    color: var(--accent-blue);
+}
+
+.kpi-icon-wrapper.clients {
+    background-color: rgba(57, 255, 20, 0.1);
+    color: var(--neon-green);
+}
+
+.kpi-icon-wrapper.ticket {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #FFC107;
+}
+
+.kpi-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.kpi-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.kpi-value-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.kpi-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* Indicador Cliente Activo Neón */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pulse-dot {
+    width: 12px;
+    height: 12px;
+    background-color: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+    animation: blink 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+}
+
+/* ==========================================================================
+   SECCIÓN TABLA Y BUSCADOR
+   ========================================================================== */
+.table-section {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.75rem;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+}
+
+.table-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.75rem;
+}
+
+/* Título Estilo Grafiti Neón */
+.table-title {
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    color: var(--neon-blue);
+    transform: rotate(-1.5deg);
+    text-shadow: 
+        0 0 5px rgba(0, 210, 255, 0.3),
+        0 0 15px rgba(0, 210, 255, 0.5),
+        2px 2px 0px #000000;
+    letter-spacing: 1.5px;
+}
+
+/* Buscador de Alto Contraste */
+.search-box-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+    transition: color 0.3s ease;
+}
+
+.search-input {
+    width: 100%;
+    background-color: #1E1E1E;
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.75rem 1rem 0.75rem 2.75rem;
+    color: var(--text-pure);
+    font-family: var(--font-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(255, 59, 48, 0.25);
+}
+
+.search-input:focus + .search-icon {
+    color: var(--accent-red);
+}
+
+/* Estructura de la Tabla */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.transactions-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* th - Cabeceras Translúcidas */
+.transactions-table th {
+    background-color: rgba(30, 30, 30, 0.85);
+    color: var(--accent-red);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 1.1rem 1.25rem;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+}
+
+/* td - Celdas de Datos */
+.transactions-table td {
+    color: var(--text-pure);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.transactions-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.transactions-table tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.table-loading {
+    text-align: center;
+    color: var(--text-muted) !important;
+    padding: 3rem !important;
+}
+
+/* Estilo de la Columna ID */
+.col-id {
+    color: var(--neon-blue) !important;
+    font-family: monospace;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+}
+
+/* Estilo Columna Usuario (Flexbox, Avatar con iniciales, divisor) */
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    flex-shrink: 0; /* Evita que el círculo se deforme */
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.user-divider {
+    width: 1px;
+    height: 20px;
+    background-color: var(--border-color);
+}
+
+.user-name {
+    color: var(--text-pure);
+    font-weight: 500;
+}
+
+/* Insignias de Membresía */
+.badge-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.badge-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Variaciones de la Insignia */
+.badge-gold .badge-dot {
+    background-color: #FFD700;
+    box-shadow: 0 0 8px #FFD700;
+}
+.badge-gold .badge-text {
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.badge-silver .badge-dot {
+    background-color: #C0C0C0;
+}
+.badge-silver .badge-text {
+    color: #C0C0C0;
+}
+
+.badge-bronze .badge-dot {
+    background-color: #CD7F32;
+}
+.badge-bronze .badge-text {
+    color: #CD7F32;
+}
+
+.badge-platinum .badge-dot {
+    background-color: #E5E4E2;
+    box-shadow: 0 0 8px rgba(229, 228, 226, 0.6);
+}
+.badge-platinum .badge-text {
+    color: #E5E4E2;
+}
+
+/* ==========================================================================
+   ANALÍTICA DE EDADES
+   ========================================================================== */
+.analytics-section {
+    padding-top: 1rem;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.section-title i {
+    color: var(--accent-blue);
+}
+
+.analytics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.age-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barras verticales de color a la izquierda */
+.age-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 6px;
+}
+
+.age-card.young::before { background-color: var(--neon-green); }
+.age-card.adult::before { background-color: #FF9F0A; }
+.age-card.senior::before { background-color: var(--accent-red); }
+
+.age-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+    padding-left: 0.5rem;
+}
+
+.age-card-header h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.age-bracket {
+    font-size: 0.8rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    color: var(--text-muted);
+}
+
+.age-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left: 0.5rem;
+}
+
+.age-metric {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.age-count {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-pure);
+}
+
+.percentage-label {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.young .percentage-label { color: var(--neon-green); }
+.adult .percentage-label { color: #FF9F0A; }
+.senior .percentage-label { color: var(--accent-red); }
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.main-footer {
+    background-color: #1A1A1A;
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.main-footer p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   DISEÑO RESPONSIVO & MOVILIDAD
+   ========================================================================== */
+@media (max-width: 768px) {
+    .hamburger-btn {
+        display: flex;
+    }
+
+    /* Animación del botón hamburguesa */
+    .hamburger-btn.open .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-btn.open .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger-btn.open .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Menú móvil deslizante */
+    .nav-menu {
+        position: fixed;
+        top: 61px; /* Altura exacta del Header */
+        right: -100%;
+        width: 75%;
+        max-width: 300px;
+        height: calc(100vh - 61px);
+        background-color: var(--bg-card);
+        border-left: 1px solid var(--border-color);
+        padding: 2rem;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-menu.open {
+        right: 0;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+        padding: 0.75rem 1rem;
+        width: 100%;
+    }
+
+    .nav-link.active {
+        border-bottom: none;
+        border-left: 3px solid var(--accent-blue);
+        border-radius: 0 6px 6px 0;
+    }
+
+    .table-header-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .search-box-wrapper {
+        max-width: 100%;
+    }
+
+    .table-section {
+        padding: 1rem;
+    }
+}
